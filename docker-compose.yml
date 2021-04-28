@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    volumes:
+      - ./dist/:/var/www/html/
+    ports:
+      - 8088:80
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: notSecureChangeMe
