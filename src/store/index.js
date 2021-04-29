@@ -7,6 +7,7 @@ class Store extends React.Component {
   constructor(props) {
     super(props)
 
+    this.showError = this.showError.bind(this);
     this.getСountries = this.getСountries.bind(this);
     this.addCountry = this.addCountry.bind(this);
 
@@ -18,6 +19,20 @@ class Store extends React.Component {
     }
   }
 
+  showError(error) {
+    let statusText = ''
+
+    if (typeof error === 'object') {
+      statusText = JSON.stringify(error)
+    } else {
+      statusText = error
+    }
+
+    this.setState({
+      statusText
+    })
+  }
+
   getСountries() {
     fetch('http://localhost:8088/get-countries.php').then(
       response => response.json()
@@ -27,17 +42,7 @@ class Store extends React.Component {
           countries: data
         })
       } else {
-        let statusText = ''
-
-        if (typeof data.error === 'object') {
-          statusText = JSON.stringify(data.error)
-        } else {
-          statusText = data.error
-        }
-
-        this.setState({
-          statusText
-        })
+        this.showError(data.error)
       }
     })
   }
@@ -60,17 +65,7 @@ class Store extends React.Component {
           statusText: ''
         })
       } else {
-        let statusText = ''
-
-        if (typeof status.error === 'object') {
-          statusText = JSON.stringify(status.error)
-        } else {
-          statusText = status.error
-        }
-
-        this.setState({
-          statusText
-        })
+        this.showError(status.error)
       }
     })
   }
