@@ -9,3 +9,5 @@ cd php-ts
 docker-compose up -d
 docker-compose exec -T db bash -c 'mysqladmin -uroot -p"notSecureChangeMe" create php-ts && mysql php-ts -uroot -p"notSecureChangeMe"' < dump.sql
 ```
+#### Follow the link:
+<http://localhost:8088/>
