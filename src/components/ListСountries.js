@@ -11,13 +11,16 @@ class ListСountries extends React.Component {
   render() {
     const { countries } = this.context
 
-    return (
-      <div className="list-group">
-        {countries.map((e) => {
-          return <button className="list-group-item list-group-item-action" key={e.id} dangerouslySetInnerHTML={{ __html: e.name }}></button>
-        })}
-      </div>
-    )
+    if (0 < countries.length)
+      return (
+        <div className="list-group">
+          {countries.map((e) => {
+            return <button className="list-group-item list-group-item-action" key={e.id} dangerouslySetInnerHTML={{ __html: e.name }}></button>
+          })}
+        </div>
+      )
+    else
+      return (<div></div>)
   }
 }
 

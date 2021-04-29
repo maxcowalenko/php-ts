@@ -21,10 +21,24 @@ class Store extends React.Component {
   getСountries() {
     fetch('http://localhost:8088/get-countries.php').then(
       response => response.json()
-    ).then((countries) => {
-      this.setState({
-        countries
-      })
+    ).then((data) => {      
+      if (!data.error) {
+        this.setState({
+          countries: data
+        })
+      } else {
+        let statusText = ''
+
+        if (typeof data.error === 'object') {
+          statusText = JSON.stringify(data.error)
+        } else {
+          statusText = data.error
+        }
+
+        this.setState({
+          statusText
+        })
+      }
     })
   }
 
