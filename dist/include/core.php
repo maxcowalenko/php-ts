@@ -22,6 +22,7 @@ class Db {
 
   function getCountries() {
     $returnValue = array();
+    $error = NULL;
 
     if ($this->isConnected) {
       try {
