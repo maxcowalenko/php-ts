@@ -1,1 +1,1 @@
-*.php linguist-language=php
+dist/*.php linguist-language=php
