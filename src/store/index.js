@@ -11,7 +11,8 @@ class Store extends React.Component {
     this.addCountry = this.addCountry.bind(this);
 
     this.state = {
-      listСountries: [],
+      statusText: '',
+      countries: [],
       getСountries: this.getСountries,
       addCountry: this.addCountry,
     }
@@ -20,16 +21,16 @@ class Store extends React.Component {
   getСountries() {
     fetch('http://localhost:8088/get-countries.php').then(
       response => response.json()
-    ).then((listСountries) => {
+    ).then((countries) => {
       this.setState({
-        listСountries
+        countries
       })
     })
   }
 
   addCountry(countryName) {
     const body = new FormData()
-    
+
     body.append('countryName', countryName)
 
     fetch('http://localhost:8088/add-country.php', {
@@ -37,9 +38,25 @@ class Store extends React.Component {
       body
     }).then(
       response => response.json()
-    ).then((data) => {
-      if (data.done) {
+    ).then((status) => {
+      if (status.done) {
         this.getСountries()
+
+        this.setState({
+          statusText: ''
+        })
+      } else {
+        let statusText = ''
+
+        if (typeof status.error === 'object') {
+          statusText = JSON.stringify(status.error)
+        } else {
+          statusText = status.error
+        }
+
+        this.setState({
+          statusText
+        })
       }
     })
   }

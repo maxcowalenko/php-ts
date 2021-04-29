@@ -1,7 +1,6 @@
 <?
-$pdo = new PDO('mysql:dbname=mysql;host=db', 'root', 'notSecureChangeMe');
-$help_keyword = $pdo->query('SELECT * FROM `help_keyword`');
-$help_keyword = $help_keyword->fetchAll(PDO::FETCH_ASSOC);
+include_once $_SERVER['DOCUMENT_ROOT'] . '/include/core.php';
 
-echo json_encode($help_keyword)
-?>
+echo json_encode(
+  $db->getCountries()
+);

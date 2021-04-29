@@ -76,10 +76,6 @@ button {
   text-transform: none;
 }
 
-[list]::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
 button,
 [type=button],
 [type=submit] {
@@ -264,6 +260,14 @@ button:not(:disabled),
   margin-left: -1px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.valid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #198754;
 }
 
 .btn {
