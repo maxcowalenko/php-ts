@@ -18,20 +18,20 @@ git pull
 ## Docker
 
 ### Run
-Builds, (re)creates, starts, and attaches to containers for a service.
+Builds, (re)creates, starts, and attaches to containers for a service:
 ```bash
 yarn up
 ```
 Follow the link: <http://localhost:8080/>
 
 ### Stop
-Forces running containers to stop by sending a `SIGKILL` signal.
+Forces running containers to stop by sending a `SIGKILL` signal:
 ```bash
 yarn kill
 ```
 
 ### Remove
-Stops containers and removes containers, networks, volumes, and images created by up.
+Stops containers and removes containers, networks, volumes, and images created by up:
 ```bash
 yarn down
 ```
