@@ -20,7 +20,7 @@
   },
   "keywords": [],
   "author": "maxcowalenko",
-  "license": "ISC",
+  "license": "GPL V3",
   "eslintConfig": {
     "extends": [
       "react-app",
