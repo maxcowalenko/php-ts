@@ -33,9 +33,34 @@ class Store extends React.Component {
     })
   }
 
+  async thenError(response) {
+    let responseLocal = await response.text();
+
+    let error;
+
+    if (response.ok) {
+      try {
+        responseLocal = JSON.parse(responseLocal)
+      } catch (e) {
+        error = `Did not receive JSON, instead received: ${responseLocal}`
+      }
+    }
+    else {
+      error = response.statusText
+    }
+
+    if (error) {
+      throw new Error(error)
+    }
+
+    return responseLocal
+  }
+
   getСountries() {
-    fetch('get-countries.php').then(
-      response => response.json()
+    fetch(
+      'get-countries.php'
+    ).then(
+      this.thenError
     ).then((data) => {
       if (!data.error) {
         this.setState({
@@ -58,7 +83,7 @@ class Store extends React.Component {
       method: 'POST',
       body
     }).then(
-      response => response.json()
+      this.thenError
     ).then((status) => {
       if (status.done) {
         this.getСountries()
