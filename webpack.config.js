@@ -27,66 +27,79 @@ module.exports = {
     }
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
-              {
-                plugins: [
-                  '@babel/plugin-proposal-class-properties'
-                ]
+    rules: [{
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [
+              '@babel/preset-env', {
+                targets: {
+                  edge: '13',
+                  firefox: '53',
+                  chrome: '55',
+                  safari: '10'
+                },
+                useBuiltIns: 'usage',
+                corejs: '3.11.1'
               }
-            ]
-          }
+            ],
+            '@babel/preset-react',
+            {
+              plugins: [
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-syntax-class-properties',
+                '@babel/plugin-transform-computed-properties',
+                '@babel/plugin-transform-shorthand-properties',
+              ]
+            }
+          ]
         }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-        ]
       }
-    ]
+    }, {
+      test: /\.css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+      ]
+    }]
   },
   plugins: [
     new CopyPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, 'public'), to: path.resolve(__dirname, 'build') },
-        {
-          from: path.resolve(__dirname, 'public/index.html'),
-          to: 'index.html',
-          transformAll(assets) {
-            const result = assets.reduce((accumulator, asset) => {
-              let content = asset.data.toString();
+      patterns: [{
+        from: path.resolve(__dirname, 'public'), to: path.resolve(__dirname, 'build')
+      }, {
+        from: path.resolve(__dirname, 'public/index.html'),
+        to: 'index.html',
+        transformAll(assets) {
+          const result = assets.reduce((accumulator, asset) => {
+            let content = asset.data.toString();
 
-              content = content.replaceAll('%PUBLIC_URL%/', '')
+            content = content.replaceAll('%PUBLIC_URL%/', '')
 
-              content = content.replaceAll('</head>', '<link rel="stylesheet" href="styles.css">\n</head>')
+            content = content.replaceAll('</head>', '<link rel="stylesheet" href="styles.css">\n</head>')
 
-              content = content.replaceAll('</body>', '<script src="main.js"></script>\n</body>')
+            content = content.replaceAll('</body>', '<script src="main.js"></script>\n</body>')
 
-              content = content.replace(new RegExp(/<!--[\s\S]*?-->/, 'g'), '')
+            content = content.replace(new RegExp(/<!--[\s\S]*?-->/, 'g'), '')
 
-              return content;
-            }, '');
+            return content;
+          }, '');
 
-            return result;
-          },
-        },
-      ],
+          return result;
+        }
+      }],
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
     new PurgeCSSPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+      paths: glob.sync(
+        `${PATHS.src}/**/*`, {
+        nodir: true
+      }),
     }),
   ]
 }
