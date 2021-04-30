@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import Store from './store'
-import Router from './router'
+import Home from './pages/Home';
 
 ReactDOM.render(
   <React.StrictMode>
     <Store>
-      <Router />
+      <Home />
     </Store>
   </React.StrictMode>,
   document.getElementById('root')
