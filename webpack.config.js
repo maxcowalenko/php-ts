@@ -2,7 +2,7 @@ const path = require('path')
 const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PurgeCSSPlugin = require('purgecss-webpack-plugin')
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
   src: path.join(__dirname, 'src')
@@ -50,7 +50,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
+          'css-loader',
         ]
       }
     ]
@@ -72,8 +72,10 @@ module.exports = {
 
               content = content.replaceAll('</body>', '<script src="main.js"></script>\n</body>')
 
+              content = content.replace(new RegExp(/<!--[\s\S]*?-->/, 'g'), '')
+
               return content;
-            }, "");
+            }, '');
 
             return result;
           },
