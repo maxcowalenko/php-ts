@@ -12,9 +12,12 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "up": "docker-compose up -d",
+    "kill": "docker-compose kill",
+    "down": "docker-compose down -v --rmi local",
     "start": "react-scripts start",
-    "build": "webpack",
-    "builds": "react-scripts build",
+    "webpackbuild": "webpack",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
