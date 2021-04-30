@@ -41,7 +41,7 @@ class AddCountry extends React.Component {
           <button className="btn btn-outline-secondary" type="submit">Добавить</button>
         </div>
         <div className="input-group mb-3">
-          <div class="valid-feedback" style={{ display: 'block' }}>
+          <div className="valid-feedback" style={{ display: 'block' }}>
             {statusText}
           </div>
         </div>
