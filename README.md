@@ -36,9 +36,19 @@ Stops containers and removes containers, networks, volumes, and images created b
 yarn down
 ```
 
-## Building
-You can build from the command-line:
+## Interface development
+
+### Downloading packages
 ```bash
 yarn
+```
+
+### Start
+```bash
+yarn start
+```
+
+### Build
+```bash
 yarn webpackbuild
 ```
