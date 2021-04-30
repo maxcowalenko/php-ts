@@ -60,12 +60,12 @@ module.exports = {
       patterns: [
         { from: path.resolve(__dirname, 'public'), to: path.resolve(__dirname, 'build') },
         {
-          from: 'public/index.html',
+          from: path.resolve(__dirname, 'public/index.html'),
           to: 'index.html',
           transformAll(assets) {
             const result = assets.reduce((accumulator, asset) => {
               let content = asset.data.toString();
-              
+
               content = content.replaceAll('%PUBLIC_URL%/', '')
 
               content = content.replaceAll('</head>', '<link rel="stylesheet" href="styles.css">\n</head>')
