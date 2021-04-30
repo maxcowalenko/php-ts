@@ -2,6 +2,7 @@ const path = require('path')
 const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PurgeCSSPlugin = require('purgecss-webpack-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
 
 const PATHS = {
   src: path.join(__dirname, 'src')
@@ -55,6 +56,30 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, 'public'), to: path.resolve(__dirname, 'build') },
+        {
+          from: 'public/index.html',
+          to: 'index.html',
+          transformAll(assets) {
+            const result = assets.reduce((accumulator, asset) => {
+              let content = asset.data.toString();
+              
+              content = content.replaceAll('%PUBLIC_URL%/', '')
+
+              content = content.replaceAll('</head>', '<link rel="stylesheet" href="styles.css">\n</head>')
+
+              content = content.replaceAll('</body>', '<script src="main.js"></script>\n</body>')
+
+              return content;
+            }, "");
+
+            return result;
+          },
+        },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
