@@ -34,9 +34,9 @@ class Store extends React.Component {
   }
 
   getСountries() {
-    fetch('http://localhost:8088/get-countries.php').then(
+    fetch('get-countries.php').then(
       response => response.json()
-    ).then((data) => {      
+    ).then((data) => {
       if (!data.error) {
         this.setState({
           countries: data
@@ -44,6 +44,8 @@ class Store extends React.Component {
       } else {
         this.showError(data.error)
       }
+    }).catch((error) => {
+      this.showError(error.message)
     })
   }
 
@@ -52,7 +54,7 @@ class Store extends React.Component {
 
     body.append('countryName', countryName)
 
-    fetch('http://localhost:8088/add-country.php', {
+    fetch('add-country.php', {
       method: 'POST',
       body
     }).then(
@@ -67,6 +69,8 @@ class Store extends React.Component {
       } else {
         this.showError(status.error)
       }
+    }).catch((error) => {
+      this.showError(error.message)
     })
   }
 
