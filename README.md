@@ -15,7 +15,7 @@ To update the source code to the latest commit, run the following command inside
 ```bash
 git pull
 ```
-## Docker
+## Docker compose
 
 ### Run
 Builds, (re)creates, starts, and attaches to containers for a service:
