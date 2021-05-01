@@ -35,7 +35,7 @@ CREATE TABLE `countries` (
 
 LOCK TABLES `countries` WRITE;
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
-INSERT INTO `countries` VALUES (1,'Москва'),(2,'Санкт-Петербург'),(3,'Новосибирск'),(4,'Екатеринбург'),(5,'Казань');
+INSERT INTO `countries` VALUES (1,'Франция'),(2,'Испания'),(3,'США'),(4,'Китай'),(5,'Италия');
 /*!40000 ALTER TABLE `countries` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
