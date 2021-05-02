@@ -13,7 +13,7 @@ The following installed packages are required to work:
 | Docker         | [Install Docker Engine](https://docs.docker.com/engine/install/)   |
 | Docker compose | [Install Docker Compose](https://docs.docker.com/compose/install/) |
 
-## Development
+### Development
 
 The following installed packages are also required for development:
 | Package | Link                                                                                      |
