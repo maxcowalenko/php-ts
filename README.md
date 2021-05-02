@@ -74,7 +74,7 @@ Builds the app for production to the **build** folder. It correctly bundles **Re
 ```bash
 yarn build
 ```
-### Final:
+### Final
 After the final development, stop the running containers:
 ```bash
 yarn kill
