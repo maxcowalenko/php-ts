@@ -15,9 +15,8 @@
     "up": "docker-compose up -d",
     "kill": "docker-compose kill",
     "down": "docker-compose down -v --rmi local",
-    "start": "react-scripts start",
-    "webpackbuild": "webpack",
-    "build": "react-scripts build",
+    "start": "docker-compose up -d && webpack",
+    "build": "webpack --config webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,6 +50,7 @@
     "mini-css-extract-plugin": "^1.6.0",
     "purgecss-webpack-plugin": "^4.0.3",
     "webpack": "^5.36.1",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "webpack-livereload-plugin": "^3.0.1"
   }
 }

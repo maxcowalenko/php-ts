@@ -1,18 +1,16 @@
 const path = require('path')
+const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-const LiveReloadPlugin = require('webpack-livereload-plugin')
+const PurgeCSSPlugin = require('purgecss-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
+  src: path.join(__dirname, 'src'),
   output: path.resolve(__dirname, 'dist')
 }
 
 module.exports = {
-  mode: 'development',
-  watch: true,
-  watchOptions: {
-    ignored: '**/node_modules',
-  },
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: PATHS.output,
@@ -25,7 +23,27 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
+            [
+              '@babel/preset-env', {
+                targets: {
+                  edge: '13',
+                  firefox: '53',
+                  chrome: '55',
+                  safari: '10'
+                },
+                useBuiltIns: 'usage',
+                corejs: '3.11.1'
+              }
+            ],
             '@babel/preset-react',
+            {
+              plugins: [
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-syntax-class-properties',
+                '@babel/plugin-transform-computed-properties',
+                '@babel/plugin-transform-shorthand-properties',
+              ]
+            }
           ]
         }
       }
@@ -66,9 +84,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    new LiveReloadPlugin({
-      port: 8081,
-      appendScriptTag: true
-    })
+    new PurgeCSSPlugin({
+      paths: glob.sync(
+        `${PATHS.src}/**/*`, {
+        nodir: true
+      }),
+    }),
   ]
 }

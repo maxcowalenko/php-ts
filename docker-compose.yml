@@ -3,7 +3,7 @@ services:
   web:
     build: .
     volumes:
-      - ./build/:/var/www/html/
+      - ./dist/:/var/www/html/
     ports:
       - 8080:80
   phpmyadmin:
