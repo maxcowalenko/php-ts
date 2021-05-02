@@ -19,7 +19,7 @@ The following installed packages are also required for development:
 | Package | Link                                                                                      |
 | ------- | ----------------------------------------------------------------------------------------- |
 | Node.js | [Installing Node.js via package manager](https://nodejs.org/en/download/package-manager/) |
-| Yarn    | [Installing Yarn 2 via package manager](https://yarnpkg.com/getting-started/install)      |
+| Yarn    | [Installing Yarn via package manager](https://classic.yarnpkg.com/en/docs/install)      |
 
 ## Downloading the source code
 
